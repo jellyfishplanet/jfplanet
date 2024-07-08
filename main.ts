@@ -125,7 +125,7 @@ namespace jfplanet {
     /**
     * Low:Attention greater than 35,Middle:Attention greater than 50,High:Attention greater than 65.
     */
-    //% block="Attention %level" blockId="GetAttentionValue"
+    //% block="Attention %level" blockId="AttentionLevel"
     export function get_Attention_Value(level: value_level): boolean {
         let value = atten_value
 
@@ -150,7 +150,7 @@ namespace jfplanet {
         }
     }
 
-    //% block="Meditation %level" blockId="GetMeditationValue"
+    //% block="Meditation %level" blockId="MeditationLevel"
     export function get_Meditaion_Value(level: value_level): boolean {
         let value = med_value
 
@@ -174,6 +174,17 @@ namespace jfplanet {
                 return false
         }
     }
+
+    //% block="MeditationValue" blockId="GetMeditationValue"
+    export function get_Meditaion(): number {
+        return med_value;
+    }
+
+    //% block="AttentionValue" blockId="GetAttentionValue"
+    export function get_Attention(): number {
+        return atten_value;
+    }
+
 
     //% block="turnDirection %dir_roll" blockId="turnDirection"
     export function get_Turn_Dir(level: dir_roll): boolean {
