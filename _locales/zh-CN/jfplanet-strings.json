@@ -1,0 +1,10 @@
+{
+  "jfplanet.get_Attention_Value|block": "专注度 %level",
+  "jfplanet.value_level.high": "专注度大于65",
+  "jfplanet.value_level.high|block": "高",
+  "jfplanet.value_level.low": "专注度大于35",
+  "jfplanet.value_level.low|block": "低",
+  "jfplanet.value_level.middle": "专注度大于50",
+  "jfplanet.value_level.middle|block": "中",
+  "{id:category}jfplanet": "jfplanet"
+}

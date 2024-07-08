@@ -1,0 +1,18 @@
+{
+    "name": "jfplanet",
+    "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "microphone": "*"
+    },
+    "files": [
+        "main.ts",
+        "README.md",
+        "_locales/zh-CN/jfplanet-jsdoc-strings.json",
+        "_locales/zh-CN/jfplanet-strings.json"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "preferredEditor": "tsprj"
+}

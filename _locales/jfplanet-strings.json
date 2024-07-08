@@ -1,0 +1,10 @@
+{
+  "jfplanet.get_Attention_Value|block": "Attention %level",
+  "jfplanet.value_level.high": "Attention greater than 65",
+  "jfplanet.value_level.high|block": "high",
+  "jfplanet.value_level.low": "Attention greater than 35",
+  "jfplanet.value_level.low|block": "low",
+  "jfplanet.value_level.middle": "Attention greater than 50",
+  "jfplanet.value_level.middle|block": "middle",
+  "{id:category}jfplanet": "jfplanet"
+}
