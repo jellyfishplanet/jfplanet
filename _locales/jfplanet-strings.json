@@ -1,10 +1,26 @@
 {
+  "jfplanet.dir_move.backward|block": "backward",
+  "jfplanet.dir_move.forward|block": "forward",
+  "jfplanet.dir_roll.left|block": "left",
+  "jfplanet.dir_roll.right|block": "right",
+  "jfplanet.getConnectState|block": "JfBrainproConnected",
+  "jfplanet.getElectrodeState|block": "ElectrodeOn",
   "jfplanet.get_Attention_Value|block": "Attention %level",
+  "jfplanet.get_Attention|block": "AttentionValue",
+  "jfplanet.get_Meditaion_Value|block": "Meditation %level",
+  "jfplanet.get_Meditaion|block": "MeditationValue",
+  "jfplanet.get_Turn_Dir|block": "turnDirection %dir_roll",
+  "jfplanet.get_motion|block": "motion %dir_move",
+  "jfplanet.isPause|block": "JFBrainproPause",
+  "jfplanet.readBrain|block": "readBrainValue",
+  "jfplanet.readDir|block": "readDirection",
+  "jfplanet.updateStatus|block": "updateStatus",
   "jfplanet.value_level.high": "Attention greater than 65",
   "jfplanet.value_level.high|block": "high",
   "jfplanet.value_level.low": "Attention greater than 35",
   "jfplanet.value_level.low|block": "low",
   "jfplanet.value_level.middle": "Attention greater than 50",
   "jfplanet.value_level.middle|block": "middle",
-  "{id:category}jfplanet": "jfplanet"
+  "jfplanet|block": "jfplanet",
+  "{id:category}Jfplanet": "Jfplanet"
 }

@@ -1,10 +1,27 @@
 {
+  "jfplanet.dir_move.backward|block": "向后",
+  "jfplanet.dir_move.forward|block": "向前",
+  "jfplanet.dir_roll.left|block": "左",
+  "jfplanet.dir_roll.right|block": "右",
+  "jfplanet.getConnectState|block": "水母脑机已经连接",
+  "jfplanet.getElectrodeState|block": "佩戴正确",
   "jfplanet.get_Attention_Value|block": "专注度 %level",
+  "jfplanet.get_Attention|block": "专注度值",
+  "jfplanet.get_Meditaion_Value|block": "冥想度 %level",
+  "jfplanet.get_Meditaion|block": "冥想值",
+  "jfplanet.get_Turn_Dir|block": "转动方向 %dir_roll",
+  "jfplanet.get_motion|block": "移动方向 %dir_move",
+  "jfplanet.isPause|block": "脑控暂停",
+  "jfplanet.readBrain|block": "读取脑控值",
+  "jfplanet.readDir|block": "读取方向值",
+  "jfplanet.updateStatus|block": "脑机状态更新",
   "jfplanet.value_level.high": "专注度大于65",
   "jfplanet.value_level.high|block": "高",
   "jfplanet.value_level.low": "专注度大于35",
   "jfplanet.value_level.low|block": "低",
   "jfplanet.value_level.middle": "专注度大于50",
   "jfplanet.value_level.middle|block": "中",
-  "{id:category}jfplanet": "jfplanet"
+  "jfplanet|block": "水母星球",
+  "{id:category}Jfplanet": "Jfplanet"
 }
+
