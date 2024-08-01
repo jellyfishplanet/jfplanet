@@ -21,12 +21,12 @@ namespace jfplanet {
         if (firstCommaIndex == -1) {
             return
         }
-        let a = parseInt(response.substr(0, firstCommaIndex - 1))
+        let a = parseInt(response.substr(0, firstCommaIndex))
         connected = (a > 0) ? true : false
         let remainingString = response.slice(firstCommaIndex + 1)
         let secondCommaIndex = remainingString.indexOf(",")
 
-        let b = parseInt(remainingString.substr(0, secondCommaIndex - 1))
+        let b = parseInt(remainingString.substr(0, secondCommaIndex ))
         electrode_on = (b > 0) ? true : false
 
         let leftString = response.slice(secondCommaIndex + 1)
@@ -47,7 +47,7 @@ namespace jfplanet {
             return
         }
 
-        atten_value = parseInt(response.substr(0, firstCommaIndex - 1))
+        atten_value = parseInt(response.substr(0, firstCommaIndex ))
         let remainingString = response.slice(firstCommaIndex + 1)
         med_value = parseInt(remainingString)
 
@@ -65,7 +65,7 @@ namespace jfplanet {
             return
         }
 
-        roll_value = parseInt(response.substr(0, firstCommaIndex - 1))
+        roll_value = parseInt(response.substr(0, firstCommaIndex ))
         let remainingString = response.slice(firstCommaIndex + 1)
         pitch_value = parseInt(remainingString)
 
