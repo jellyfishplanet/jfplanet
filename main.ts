@@ -14,8 +14,9 @@ namespace jfplanet {
     //% block="updateStatus" blockId="updateStatus"
     export function updateStatus() {
         serial.writeString("status")
-        basic.pause(80)
+        basic.pause(100)
         let response = serial.readLine()
+        basic.pause(100)
 
         let firstCommaIndex = response.indexOf(",")
         if (firstCommaIndex == -1) {
@@ -39,8 +40,9 @@ namespace jfplanet {
     //% block="readBrainValue" blockId="readBrainValue"
     export function readBrain() {
         serial.writeString("brain")
-        basic.pause(80)
+        basic.pause(100)
         let response = serial.readLine()
+        basic.pause(100)
 
         let firstCommaIndex = response.indexOf(",")
         if (firstCommaIndex == -1) {
@@ -57,8 +59,9 @@ namespace jfplanet {
     //% block="readDirection" blockId="readDirection"
     export function readDir() {
         serial.writeString("direction")
-        basic.pause(80)
+        basic.pause(100)
         let response = serial.readLine()
+        basic.pause(100)
 
         let firstCommaIndex = response.indexOf(",")
         if (firstCommaIndex == -1) {
