@@ -13,62 +13,101 @@ namespace jfplanet {
 
     //% block="updateStatus" blockId="updateStatus"
     export function updateStatus() {
-        serial.writeString("status")
-        basic.pause(100)
-        let response = serial.readLine()
-        basic.pause(100)
+        serial.readString()
+        serial.writeString("status\r\n")
+        let timeout = 200
+        let response = ""
+        let timestamp = input.runningTime()
+        while (true) {
+            if (input.runningTime() - timestamp > timeout) {
+                break
+            }
+            response += serial.readString()
+            if (response.includes("\r\n")) {
+                break
+            }
+        }
 
         let firstCommaIndex = response.indexOf(",")
         if (firstCommaIndex == -1) {
             return
         }
-        let a = parseInt(response.substr(0, firstCommaIndex))
+        let a = parseInt(response.slice(0, firstCommaIndex))
         connected = (a > 0) ? true : false
         let remainingString = response.slice(firstCommaIndex + 1)
         let secondCommaIndex = remainingString.indexOf(",")
 
-        let b = parseInt(remainingString.substr(0, secondCommaIndex ))
+        if (secondCommaIndex == -1) {
+            return
+        }
+
+        let b = parseInt(remainingString.slice(0, secondCommaIndex))
         electrode_on = (b > 0) ? true : false
 
         let leftString = response.slice(secondCommaIndex + 1)
 
-        let c = parseInt(leftString)
+        let endLine = leftString.indexOf("r\n")
+        if (endLine == -1) {
+            return
+        }
+
+        let laststring = leftString.slice(0, endLine)
+
+        let c = parseInt(laststring)
         pause = (c > 0) ? true : false
 
     }
 
     //% block="readBrainValue" blockId="readBrainValue"
     export function readBrain() {
-        serial.writeString("brain")
-        basic.pause(100)
-        let response = serial.readLine()
-        basic.pause(100)
+        serial.readString()
+        serial.writeString("brain\r\n")
+        let timeout = 200
+        let response = ""
+        let timestamp = input.runningTime()
+        while (true) {
+            if (input.runningTime() - timestamp > timeout) {
+                break
+            }
+            response += serial.readString()
+            if (response.includes("\r\n")) {
+                break
+            }
+        }
 
         let firstCommaIndex = response.indexOf(",")
         if (firstCommaIndex == -1) {
             return
         }
-
-        atten_value = parseInt(response.substr(0, firstCommaIndex ))
+        atten_value = parseInt(response.slice(0, firstCommaIndex))
         let remainingString = response.slice(firstCommaIndex + 1)
         med_value = parseInt(remainingString)
-
     }
 
 
     //% block="readDirection" blockId="readDirection"
     export function readDir() {
-        serial.writeString("direction")
-        basic.pause(100)
-        let response = serial.readLine()
-        basic.pause(100)
+        serial.readString()
+        serial.writeString("direction\r\n")
+        let timeout = 200
+        let response = ""
+        let timestamp = input.runningTime()
+        while (true) {
+            if (input.runningTime() - timestamp > timeout) {
+                break
+            }
+            response += serial.readString()
+            if (response.includes("\r\n")) {
+                break
+            }
+        }
 
         let firstCommaIndex = response.indexOf(",")
         if (firstCommaIndex == -1) {
             return
         }
 
-        roll_value = parseInt(response.substr(0, firstCommaIndex ))
+        roll_value = parseInt(response.slice(0, firstCommaIndex ))
         let remainingString = response.slice(firstCommaIndex + 1)
         pitch_value = parseInt(remainingString)
 
