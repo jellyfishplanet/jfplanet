@@ -11,11 +11,9 @@ namespace jfplanet {
     let roll_value = 0;
     let pitch_value = 0;
 
-    //% block="updateStatus" blockId="updateStatus"
-    export function updateStatus() {
+    function readSerialData(command: string, timeout: number = 200): string {
         serial.readString()
-        serial.writeString("status\r\n")
-        let timeout = 200
+        serial.writeString(command + "\r\n")
         let response = ""
         let timestamp = input.runningTime()
         while (true) {
@@ -27,90 +25,46 @@ namespace jfplanet {
                 break
             }
         }
+        return response
+    }
 
-        let firstCommaIndex = response.indexOf(",")
-        if (firstCommaIndex == -1) {
+    function parseResponse(response: string): string[] {
+        return response.trim().split(",")
+    }
+
+    //% block="updateStatus" blockId="updateStatus"
+    export function updateStatus() {
+        let response = readSerialData("status")
+        let parts = parseResponse(response)
+        if (parts.length < 3) {
             return
         }
-        let a = parseInt(response.slice(0, firstCommaIndex))
-        connected = (a > 0) ? true : false
-        let remainingString = response.slice(firstCommaIndex + 1)
-        let secondCommaIndex = remainingString.indexOf(",")
-
-        if (secondCommaIndex == -1) {
-            return
-        }
-
-        let b = parseInt(remainingString.slice(0, secondCommaIndex))
-        electrode_on = (b > 0) ? true : false
-
-        let leftString = response.slice(secondCommaIndex + 1)
-
-        let endLine = leftString.indexOf("r\n")
-        if (endLine == -1) {
-            return
-        }
-
-        let laststring = leftString.slice(0, endLine)
-
-        let c = parseInt(laststring)
-        pause = (c > 0) ? true : false
-
+        connected = parseInt(parts[0]) > 0
+        electrode_on = parseInt(parts[1]) > 0
+        pause = parseInt(parts[2]) > 0
     }
 
     //% block="readBrainValue" blockId="readBrainValue"
     export function readBrain() {
-        serial.readString()
-        serial.writeString("brain\r\n")
-        let timeout = 200
-        let response = ""
-        let timestamp = input.runningTime()
-        while (true) {
-            if (input.runningTime() - timestamp > timeout) {
-                break
-            }
-            response += serial.readString()
-            if (response.includes("\r\n")) {
-                break
-            }
-        }
-
-        let firstCommaIndex = response.indexOf(",")
-        if (firstCommaIndex == -1) {
+        let response = readSerialData("brain")
+        let parts = parseResponse(response)
+        if (parts.length < 2) {
             return
         }
-        atten_value = parseInt(response.slice(0, firstCommaIndex))
-        let remainingString = response.slice(firstCommaIndex + 1)
-        med_value = parseInt(remainingString)
+        atten_value = parseInt(parts[0])
+        med_value = parseInt(parts[1])
     }
 
 
     //% block="readDirection" blockId="readDirection"
     export function readDir() {
-        serial.readString()
-        serial.writeString("direction\r\n")
-        let timeout = 200
-        let response = ""
-        let timestamp = input.runningTime()
-        while (true) {
-            if (input.runningTime() - timestamp > timeout) {
-                break
-            }
-            response += serial.readString()
-            if (response.includes("\r\n")) {
-                break
-            }
-        }
-
-        let firstCommaIndex = response.indexOf(",")
-        if (firstCommaIndex == -1) {
+        let response = readSerialData("direction")
+        let parts = parseResponse(response)
+        if (parts.length < 2) {
             return
         }
-
-        roll_value = parseInt(response.slice(0, firstCommaIndex ))
-        let remainingString = response.slice(firstCommaIndex + 1)
-        pitch_value = parseInt(remainingString)
-
+        roll_value = parseInt(parts[0])
+        pitch_value = parseInt(parts[1])
     }
 
 
@@ -170,23 +124,13 @@ namespace jfplanet {
     //% block="Attention %level" blockId="AttentionLevel"
     export function get_Attention_Value(level: value_level): boolean {
         let value = atten_value
-
         switch (level) {
             case value_level.low:
-                if (value > value_level.low)
-                    return true
-                else
-                    return false
+                return value > value_level.low
             case value_level.middle:
-                if (value > value_level.middle)
-                    return true
-                else
-                    return false
+                return value > value_level.middle
             case value_level.high:
-                if (value > value_level.high)
-                    return true
-                else
-                    return false
+                return value > value_level.high
             default:
                 return false
         }
@@ -195,23 +139,13 @@ namespace jfplanet {
     //% block="Meditation %level" blockId="MeditationLevel"
     export function get_Meditaion_Value(level: value_level): boolean {
         let value = med_value
-
         switch (level) {
             case value_level.low:
-                if (value > value_level.low)
-                    return true
-                else
-                    return false
+                return value > value_level.low
             case value_level.middle:
-                if (value > value_level.middle)
-                    return true
-                else
-                    return false
+                return value > value_level.middle
             case value_level.high:
-                if (value > value_level.high)
-                    return true
-                else
-                    return false
+                return value > value_level.high
             default:
                 return false
         }
@@ -233,15 +167,9 @@ namespace jfplanet {
         let value = roll_value
         switch (level) {
             case dir_roll.left:
-                if (value > 100)
-                    return true
-                else
-                    return false
+                return value > 100
             case dir_roll.right:
-                if (value < -100)
-                    return true
-                else
-                    return false
+                return value < -100
             default:
                 return false
         }
@@ -252,20 +180,13 @@ namespace jfplanet {
         let value = pitch_value
         switch (level) {
             case dir_move.forward:
-                if (value > 50)
-                    return true
-                else
-                    return false
+                return value > 50
             case dir_move.backward:
-                if (value < -100)
-                    return true
-                else
-                    return false
+                return value < -100
             default:
                 return false
         }
     }
-
 
 }
 
